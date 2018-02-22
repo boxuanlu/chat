@@ -13,16 +13,15 @@ class Chatbar extends Component {
     }
   }
 
-  onEnterMessage = (e) => {
-    let chatMessage = e.target.value;
-    if (e.key === 'Enter') {
+  onEnterMessage = (messageEntered) => {
+    let chatMessage = messageEntered.target.value;
+    if (messageEntered.key === 'Enter') {
       this.props.onEnterMessage(chatMessage);
-      e.target.value = '';
+      messageEntered.target.value = "";
     }
   }
 
   render() {
-    console.log('Rendering <ChatBar/>');
     return (
       <footer className="chatbar">
         <input className="chatbar-username"

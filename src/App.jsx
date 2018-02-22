@@ -12,7 +12,7 @@ class App extends Component {
       count: "",
     };
   }
-
+// connected to the server
   componentDidMount() {
     this.socket = new WebSocket('ws://localhost:3001/');
     this.socket.addEventListener('open', (e) => {
@@ -28,16 +28,25 @@ class App extends Component {
     }
   }
 
+  // set up a newmessage box for user chat each other;
   onEnterMessage = (messageEntered) => {
-    const newMessage = { type: "user", username: this.state.currentUser.name, content: messageEntered};
+    const newMessage = {
+      type: "user",
+    username: this.state.currentUser.name,
+    content: messageEntered
+  };
     const messages = this.state.messages.concat(newMessage)
     this.socket.send(JSON.stringify(newMessage));
   }
 
+// on entername function is to help user change their name and the server know it's a system message;
   onEnterName = (nameEntered) => {
     const newUser = nameEntered;
     const contentMessage = this.state.currentUser.name + " has changed their name to " + newUser;
-    const newUserUpdate = {type: "system", content: contentMessage};
+    const newUserUpdate = {
+      type: "system",
+    content: contentMessage
+  };
     this.state.currentUser.name = newUser;
     this.socket.send(JSON.stringify(newUserUpdate));
   }
