@@ -6,18 +6,18 @@ class Chatbar extends Component {
     this.userName = "";
   }
 
+    onEnterName = (nameEntered) => {
+    if (nameEntered.target.value !== this.userName) {
+      this.props.onEnterName(nameEntered.target.value);
+      this.userName = nameEntered.target.value;
+    }
+  }
+
   onEnterMessage = (e) => {
     let chatMessage = e.target.value;
     if (e.key === 'Enter') {
       this.props.onEnterMessage(chatMessage);
       e.target.value = '';
-    }
-  }
-
-  onEnterName = (e) => {
-    if (e.target.value !== this.userName) {
-      this.props.onEnterName(e.target.value);
-      this.userName = e.target.value;
     }
   }
 
@@ -27,7 +27,6 @@ class Chatbar extends Component {
       <footer className="chatbar">
         <input className="chatbar-username"
           placeholder="Your Name (Optional)"
-          // defaultValue={this.props.name}
           onBlur={this.onEnterName}
         />
         <input
