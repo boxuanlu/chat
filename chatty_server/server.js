@@ -88,12 +88,9 @@ wss.on('connection', (ws) => {
     ws.on('message', function incoming(data) {
         let newMessage = JSON.parse(data);
         messages.push(newMessage);
-        while (messages.length > 5) {
-            messages.shift();
-        }
         if (newMessage.type === "user") {
             newMessage.id = uuidv4();
-            newMessage.color = color;
+            // newMessage.color = color;
             wss.clients.forEach(function each(client) {
                 if (client.readystate === SocketServer.OPEN) {
                     client.send(JSON.stringify(newMessage));

@@ -9,8 +9,6 @@ class Chatbar extends Component {
   onEnterMessage = (e) => {
     let chatMessage = e.target.value;
     if (e.key === 'Enter') {
-      e.preventDefault();
-      console.log(chatMessage);
       this.props.onEnterMessage(chatMessage);
       e.target.value = '';
     }
@@ -29,7 +27,7 @@ class Chatbar extends Component {
       <footer className="chatbar">
         <input className="chatbar-username"
           placeholder="Your Name (Optional)"
-          defaultValue={this.props.name}
+          // defaultValue={this.props.name}
           onBlur={this.onEnterName}
         />
         <input
