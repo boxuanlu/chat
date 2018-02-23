@@ -54,10 +54,10 @@ componentDidMount() {
 
 // on entername function is to help user change their name and the server know it's a system message;
   changeName(nameEntered){
+    const newUser = nameEntered;
     if (nameEntered === "") {
       nameEntered = "Anonymous";
     };
-    const newUser = nameEntered;
     const contentMessage = this.state.currentUser.name + " has changed their name to " + newUser;
     const newUserUpdate = {
       type: "system",
@@ -71,7 +71,7 @@ componentDidMount() {
       <div>
         <NavBar count={this.state.count}/>
         <MessageList messages={this.state.messages} />
-        <Chatbar name={"Anonymous"} changeName={this.changeName} messageinput={this.messageinput}/>
+        <Chatbar name={this.state.currentUser.name} changeName={this.changeName} messageinput={this.messageinput}/>
       </div>
     );
   }
