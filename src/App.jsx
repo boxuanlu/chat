@@ -54,15 +54,18 @@ componentDidMount() {
 
 // on entername function is to help user change their name and the server know it's a system message;
   changeName(nameEntered){
-    const newUser = nameEntered;
+    console.log(nameEntered);
     if (nameEntered === "") {
+      console.log("sdasad");
       nameEntered = "Anonymous";
     };
+    const newUser = nameEntered;
     const contentMessage = this.state.currentUser.name + " has changed their name to " + newUser;
     const newUserUpdate = {
       type: "system",
     content: contentMessage
-  }
+  };
+  this.state.currentUser.name = newUser;
   this.socket.send(JSON.stringify(newUserUpdate));
 }
 
