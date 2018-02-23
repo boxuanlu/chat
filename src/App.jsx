@@ -48,7 +48,6 @@ componentDidMount() {
     username: this.state.currentUser.name,
     content: messageEntered
   };
-    const messages = this.state.messages.concat(newMessage);
     this.socket.send(JSON.stringify(newMessage));
   }
 
