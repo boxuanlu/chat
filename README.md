@@ -1,45 +1,53 @@
-React Boilerplate
+ChattyApp
 =====================
 
-A minimal and light dev environment for ReactJS.
+ChattyApp is a single page website which allows you set up a name and send message with someone else. If you do not want show your name the system will set up your name by anonymous. when you set up your name, all the users will see this change. It will also show how many users are online.
 
-### Usage
 
-Clone the boilerplate and create your own git repo.
 
-```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-cd react-simple-boilerplate
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
-```
+### Get started
 
-Install the dependencies and start the server.
+1.Fork this repository, then clone your fork of this repository.
+2.Install dependencies using the npm install command.
+3.Start the app using the npm start command. The app will be served at http://localhost:3000/.
+4.Start the server in another terminal by navigating to the chatty_server folder and using npm start.
+5.Go to http://localhost:3000/ in your browser.
+6.Set your username or become Anonymous.
+7.Now you can start chat with someone.
 
-```
-npm install
-npm start
-open http://localhost:3000
-```
 
-### Static Files
 
-You can store static files like images, fonts, etc in the `build` folder.
+### Screenshot
+!["two users online"](https://github.com/boxuanlu/chat/blob/master/picture/messageWillShowinBothScreen.png?raw=true)
+!["the user will set to Anonymous"](https://github.com/boxuanlu/chat/blob/master/picture/noNameisSetToAnonyomus.png?raw=true)
 
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
+### devDependencies for react-simple 
 
-### Linting
+* babel-core
+* babel-loader
+* babel-preset-es2015
+* babel-preset-react
+* babel-preset-stage-0
+* css-loader
+* eslint
+* eslint-plugin-react
+* node-sass
+* sass-loader
+* sockjs-client
+* style-loader
+* webpack
+* webpack-dev-server
 
-This boilerplate project includes React ESLint configuration.
+### Dependencies for react-simple
 
-```
-npm run lint
-```
+* express
+* react
+* react-dom
+* ws
 
-### Dependencies
+### Dependencies for chatty_server
 
-* React
-* Webpack
-* [babel-loader](https://github.com/babel/babel-loader)
-* [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+* express
+* uuid
+* ws
+
