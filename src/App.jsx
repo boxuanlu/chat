@@ -11,52 +11,67 @@ class App extends Component {
       messages: [],
       count: "",
     };
+    this.messageinput = this.messageinput.bind(this);
+    this.changeName = this.changeName.bind(this);
   }
 // connected to the server
-  componentDidMount() {
-    this.socket = new WebSocket('ws://localhost:3001/');
-    this.socket.addEventListener('open', (e) => {
-      console.log("Connected to Server");
-    });
-    this.socket.onmessage = (event) => {
-      let incomingMessage = JSON.parse(event.data);
-      if (!incomingMessage.type) {
-        this.setState({count: incomingMessage})
-      } else {
-        this.setState({ messages: this.state.messages.concat(incomingMessage) })
-    }
-    }
-  }
+componentDidMount() {
+  console.log("componentDidMount <App />");
+  this.socket = new WebSocket("ws://localhost:3001");
 
-  // set up a newmessage box for user chat each other;
-  onEnterMessage = (messageEntered) => {
+  this.socket.onopen = (event) => {
+    console.log("Connected to server");
+  };
+
+  this.socket.onmessage = (event) => {
+    console.log(event);
+    // The socket event data is encoded as a JSON string.
+    // This line turns it into an object
+    const data = JSON.parse(event.data);
+    switch(data.type) {
+      case "user":
+        this.setState({ messages: this.state.messages.concat(data)});
+        break;
+      case "system":
+        this.setState({ messages: this.state.messages.concat(data)});
+        break;
+      default:
+        this.setState({count: data});
+        //
+    }
+  };
+}
+// set up a newmessage object to connect with server
+  messageinput(messageEntered){
     const newMessage = {
       type: "user",
     username: this.state.currentUser.name,
     content: messageEntered
   };
-    const messages = this.state.messages.concat(newMessage)
+    const messages = this.state.messages.concat(newMessage);
     this.socket.send(JSON.stringify(newMessage));
   }
 
 // on entername function is to help user change their name and the server know it's a system message;
-  onEnterName = (nameEntered) => {
+  changeName(nameEntered){
+    if (nameEntered === "") {
+      nameEntered = "Anonymous";
+    };
     const newUser = nameEntered;
     const contentMessage = this.state.currentUser.name + " has changed their name to " + newUser;
     const newUserUpdate = {
       type: "system",
     content: contentMessage
-  };
-    this.state.currentUser.name = newUser;
-    this.socket.send(JSON.stringify(newUserUpdate));
   }
+  this.socket.send(JSON.stringify(newUserUpdate));
+}
 
   render() {
     return (
       <div>
         <NavBar count={this.state.count}/>
         <MessageList messages={this.state.messages} />
-        <Chatbar name={"Anonymous"} onEnterName={this.onEnterName} onEnterMessage={this.onEnterMessage}/>
+        <Chatbar name={"Anonymous"} changeName={this.changeName} messageinput={this.messageinput}/>
       </div>
     );
   }

@@ -5,18 +5,18 @@ class Chatbar extends Component {
     super(props);
     this.userName = "";
   }
-
-    onEnterName = (nameEntered) => {
+// user change their name
+    changeName = (nameEntered) => {
     if (nameEntered.target.value !== this.userName) {
-      this.props.onEnterName(nameEntered.target.value);
+      this.props.changeName(nameEntered.target.value);
       this.userName = nameEntered.target.value;
     }
   }
-
-  onEnterMessage = (messageEntered) => {
+// message set up
+  messageinput = (messageEntered) => {
     let chatMessage = messageEntered.target.value;
     if (messageEntered.key === 'Enter') {
-      this.props.onEnterMessage(chatMessage);
+      this.props.messageinput(chatMessage);
       messageEntered.target.value = "";
     }
   }
@@ -26,13 +26,13 @@ class Chatbar extends Component {
       <footer className="chatbar">
         <input className="chatbar-username"
           placeholder="Your Name (Optional)"
-          onBlur={this.onEnterName}
+          onBlur={this.changeName} // here to use onBlur make the name change easier to use.(no need for hit enter every time)
         />
         <input
           className="chatbar-message"
           name="chatMessage"
           placeholder="Type a message and hit ENTER"
-          onKeyPress={this.onEnterMessage}
+          onKeyPress={this.messageinput}
         />
       </footer>
     );

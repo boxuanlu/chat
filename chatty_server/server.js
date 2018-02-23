@@ -28,6 +28,7 @@ wss.on('connection', (ws) => {
     ws.send(JSON.stringify(message));
   }
 
+// this is for letting the server know if this message is come form user or system;
   ws.on('message', function incoming(data) {
     let newMessage = JSON.parse(data);
     messages.push(newMessage);

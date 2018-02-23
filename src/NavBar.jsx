@@ -11,5 +11,4 @@ class NavBar extends Component {
   }
 }
 export default NavBar;
-
-
+// use people is easy to handle one or more users online;
