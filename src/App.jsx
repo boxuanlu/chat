@@ -24,7 +24,6 @@ componentDidMount() {
   };
 
   this.socket.onmessage = (event) => {
-    console.log(event);
     // The socket event data is encoded as a JSON string.
     // This line turns it into an object
     const data = JSON.parse(event.data);

@@ -40,6 +40,7 @@ wss.on('connection', (ws) => {
         }
       })
     } else if (newMessage.type === "system") {
+      newMessage.id = uuidv4();
       wss.clients.forEach(function each(client) {
         if (client.readystate === SocketServer.OPEN) {
           client.send(JSON.stringify(newMessage));
